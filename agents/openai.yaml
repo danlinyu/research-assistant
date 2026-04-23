@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Research Assistant"
+  short_description: "Idea-to-IMRaD academic research workflow"
+  default_prompt: "Use $research-assistant to interview me about a research idea, search public academic literature, design the study, and draft a citation-verified IMRaD manuscript."
