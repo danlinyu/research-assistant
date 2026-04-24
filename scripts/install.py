@@ -35,11 +35,24 @@ def copy_skill(src: Path, dst: Path) -> None:
     if dst.exists():
         shutil.rmtree(dst)
 
-    def ignore(_dir: str, names: list[str]) -> set[str]:
-        ignored = {".git", "__pycache__", ".DS_Store", "Thumbs.db"}
+    def ignore(current_dir: str, names: list[str]) -> set[str]:
+        current = Path(current_dir).resolve()
+        ignored = {
+            ".git",
+            "__pycache__",
+            ".DS_Store",
+            "Thumbs.db",
+            "README.md",
+            ".gitignore",
+        }
+        if current == src.resolve() / "scripts":
+            ignored |= {"install.py", "install.ps1"}
         return {name for name in names if name in ignored}
 
     shutil.copytree(src, dst, ignore=ignore)
+    scripts_dir = dst / "scripts"
+    if scripts_dir.exists() and not any(scripts_dir.iterdir()):
+        scripts_dir.rmdir()
 
 
 def main() -> int:
