@@ -42,6 +42,7 @@ def copy_skill(src: Path, dst: Path) -> None:
             "__pycache__",
             ".DS_Store",
             "Thumbs.db",
+            "LICENSE",
             "README.md",
             ".gitignore",
         }
